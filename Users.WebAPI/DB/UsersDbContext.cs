@@ -5,6 +5,10 @@ namespace Users.WebAPI.DB
 {
     public class UsersDbContext : DbContext
     {
+        static UsersDbContext()
+        {
+            Database.SetInitializer<UsersDbContext>(new UsersContextInitializer());
+        }
         public UsersDbContext()
             : base("DefaultConnection") { }
 
