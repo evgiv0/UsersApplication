@@ -3,50 +3,19 @@
     angular
         .module("userManagement")
         .controller("UserListCtrl",
-        UserListCtrl);
+        ["usersResource", UserListCtrl]);
 
-    function UserListCtrl() {
+    function UserListCtrl(usersResource) {
         var usersCtrl = this;
 
-        usersCtrl.users = [
-            {
-                "userId": 1,
-                "FirstName": "Zhenya",
-                "MiddleName": "Igorevich",
-                "LastName": "Ivaneev",
-                "Contacts": [{ "value": "1concact" }, { "value": "2concact" }, { "value": "3concact" } ]
-            },
-            {
-                "userId": 1,
-                "FirstName": "Zhenya",
-                "MiddleName": "Igorevich",
-                "LastName": "Ivaneev",
-                    "Contacts": [{ "value": "1concact" }, { "value": "2concact" }, { "value": "3concact" } ]
+        usersCtrl.searchString = "ch";
 
-            },
-            {
-                "userId": 1,
-                "FirstName": "Zhenya",
-                "MiddleName": "Igorevich",
-                "LastName": "Ivaneev",
-                "Contacts": [{ "value": "1concact" }, { "value": "2concact" }, { "value": "3concact" }]
-
-            },
-            {
-                "userId": 1,
-                "FirstName": "Zhenya",
-                "MiddleName": "Igorevich",
-                "LastName": "Ivaneev",
-                "Contacts": [{ "value": "1concact" }, { "value": "2concact" }, { "value": "3concact" }]
-
-            },
-            {
-                "userId": 1,
-                "FirstName": "Zhenya",
-                "MiddleName": "Igorevich",
-                "LastName": "Ivaneev",
-                "Contacts": []
-            }
-        ];
+        usersResource.query({
+            $filter: "substringof('" + usersCtrl.searchString + "', FirstName)" + 
+            "or substringof('" + usersCtrl.searchString + "', LastName)" + 
+            "substringof('" + usersCtrl.searchString + "', MiddleName)"
+        }, function (data) {
+            usersCtrl.users = data;
+        });
     }
 }());

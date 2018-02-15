@@ -1,4 +1,5 @@
 ﻿
+using Newtonsoft.Json.Serialization;
 using System.Web.Http;
 
 
@@ -13,6 +14,10 @@ namespace Users.WebAPI
 
             // Web API routes
             config.MapHttpAttributeRoutes();
+
+            config.EnableCors();
+            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver =
+                new CamelCasePropertyNamesContractResolver();
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

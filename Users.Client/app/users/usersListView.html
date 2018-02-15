@@ -17,12 +17,12 @@
             </thead>
             <tbody>
                 <tr ng-repeat="user in usersCtrl.users">
-                    <td>{{user.FirstName}}</td>
-                    <td>{{user.MiddleName}}</td>
-                    <td>{{user.LastName}}</td>
+                    <td>{{user.firstName}}</td>
+                    <td>{{user.middleName}}</td>
+                    <td>{{user.lastName}}</td>
                     <td>
                         <table>
-                            <tr ng-repeat="contact in user.Contacts">
+                            <tr ng-repeat="contact in user.contacts">
                                 <td>{{contact.value}}</td>
                             </tr>
                         </table>

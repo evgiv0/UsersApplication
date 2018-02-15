@@ -1,0 +1,115 @@
+﻿<form class="form-horizontal"
+      name="userForm"
+      novalidate
+      ng-controller="UserEditCtrl as vm">
+    <fieldset>
+        <legend>User Information</legend>
+        <div class="form-group"
+             ng-class="{'has-error':userForm.inputUserFirstName.$invalid &&
+                                    userForm.inputUserFirstName.$dirty}">
+            <label class="col-md-2 control-label"
+                   for="inputUserFirstName">User FirstName</label>
+
+            <div class="col-md-4">
+                <input class="form-control"
+                       id="inputUserFirstName"
+                       name="inputUserFirstName"
+                       type="text"
+                       placeholder="User FirstName (required)"
+                       ng-model="vm.user.firstName"
+                       required />
+            </div>
+            <span class="help-block has-error">
+                <span ng-show="userForm.inputUserFirstName.$error.required">
+                    User FirstName is required.
+                </span>
+            </span>
+        </div>
+
+        <div class="form-group"
+             ng-class="{'has-error':userForm.inputUserLastName.$invalid &&
+                                    userForm.inputUserLastName.$dirty}">
+            <label class="col-md-2 control-label" for="inputUserLastName">User LastName</label>
+
+            <div class="col-md-4">
+                <input class="form-control"
+                       id="inputUserLastName"
+                       name="inputUserLastName"
+                       type="text"
+                       placeholder="User LastName (required)"
+                       ng-model="vm.user.lastName"
+                       required>
+            </div>
+            <span class="help-block has-error"
+                  ng-show="userForm.inputUserLastName.$invalid ">
+                User LastName required
+            </span>
+        </div>
+
+        <div class="form-group"
+             ng-class="{'has-error':userForm.inputMiddleLastName.$invalid &&
+                                    userForm.inputMiddleLastName.$dirty}">
+            <label class="col-md-2 control-label" for="inputMiddleLastName">User MiddleName</label>
+
+            <div class="col-md-4">
+                <input class="form-control"
+                       id="inputMiddleLastName"
+                       name="inputMiddleLastName"
+                       type="text"
+                       placeholder="User MiddleName (required)"
+                       ng-model="vm.user.middleName"
+                       required>
+            </div>
+            <span class="help-block has-error"
+                  ng-show="userForm.inputMiddleLastName.$invalid ">
+                User MiddleName required
+            </span>
+        </div>
+
+        <div class="form-group"
+             ng-class="{'has-error':userForm.inputContactValue.$invalid &&
+                                    userForm.inputContactValue.$dirty}">
+            <label class="col-md-2 control-label" for="inputContactValue">User Contacts</label>
+
+            <div class="col-md-4"  >
+                <input ng-repeat="contact in vm.user.contacts"
+                       class="form-control"
+                       style="margin-bottom:10px"
+                       id="inputContactValue"
+                       name="inputContactValue"
+                       type="text"
+                       placeholder="User Contacts"
+                       ng-model="contact.value">
+            </div>
+        </div>
+
+        
+        <div class="form-group">
+            <div class="col-md-4 col-md-offset-2">
+                <span>
+                    <button class="btn btn-primary"
+                            style="width:80px;margin-right:10px"
+                            ng-click="vm.submit()"
+                            ng-disabled="userForm.$invalid">
+                        Save
+                    </button>
+                </span>
+                <span>
+                    <button class="btn btn-default"
+                            style="width:70px"
+                            ng-click="vm.cancel(userForm)">
+                        Cancel
+                    </button>
+                </span>
+            </div>
+        </div>
+
+        <div class="form-group"
+             ng-show="vm.message">
+            <div class="col-md-6">
+                <pre style="font: inherit">{{vm.message }}</pre>
+            </div>
+        </div>
+
+    </fieldset>
+</form>

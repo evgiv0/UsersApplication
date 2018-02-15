@@ -16,11 +16,18 @@
     </nav>
 
     <div class="container">
-        <div ng-include="'app/users/usersListView.html'"></div>
+        <div ng-include="'app/users/userEditView.html'"></div>
     </div>
 
     <script src="scripts/angular.js"></script>
+    <script src="scripts/angular-resource.js"></script>
+
     <script src="app/app.js"></script>
+
+    <script src="Common/common.services.js"></script>
+    <script src="Common/usersResource.js"></script>
+
     <script src="app/users/userListController.js"></script>
+    <script src="app/users/userEditController.js"></script>
 </body>
 </html>

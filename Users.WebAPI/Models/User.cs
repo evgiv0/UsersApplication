@@ -10,6 +10,9 @@ namespace Users.WebAPI.Models
         public string FirstName { get; set; }
         public virtual List<Contact> Contacts { get; set; }
 
-
+        public User()
+        {
+            Contacts = new List<Contact>();
+        }
     }
 }
