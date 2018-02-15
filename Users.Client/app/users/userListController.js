@@ -6,16 +6,20 @@
         ["usersResource", UserListCtrl]);
 
     function UserListCtrl(usersResource) {
-        var usersCtrl = this;
+        var vm = this;
 
-        usersCtrl.searchString = "ch";
+        vm.searchString = "ch";
 
-        usersResource.query({
-            $filter: "substringof('" + usersCtrl.searchString + "', FirstName)" + 
-            "or substringof('" + usersCtrl.searchString + "', LastName)" + 
-            "substringof('" + usersCtrl.searchString + "', MiddleName)"
-        }, function (data) {
-            usersCtrl.users = data;
-        });
+        vm.queryData = function (searchString) {
+            usersResource.query({
+                $filter: "substringof('" + searchString + "', FirstName)" +
+                "or substringof('" + searchString + "', LastName)" +
+                "or substringof('" + searchString + "', MiddleName)"
+            }, function (data) {
+                vm.users = data;
+            });
+        };
+
+        vm.queryData("ch");
     }
 }());

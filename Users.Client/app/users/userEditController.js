@@ -3,15 +3,17 @@
     angular
         .module("userManagement")
         .controller("UserEditCtrl",
-        ["usersResource", UserEditCtrl]);
+        ["usersResource", "$routeParams", UserEditCtrl]);
 
-    function UserEditCtrl(usersResource) {
+    function UserEditCtrl(usersResource, $routeParams) {
         var vm = this;
 
         vm.user = {};
         vm.message = '';
 
-        usersResource.get({ id: 1 },
+        var userId = $routeParams.id;
+
+        usersResource.get({ id: userId },
             function (data) {
                 vm.user = data;
                 vm.originalUser = angular.copy(data);

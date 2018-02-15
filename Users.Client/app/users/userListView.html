@@ -4,6 +4,15 @@
          style="font-size:large">
         Users List
     </div>
+    <div class="panel-heading"
+         style="font-size:large">
+        <div class="btn-group">
+            <a href="#/Users/Edit/0" class="btn btn-default">
+                Add User
+            </a>
+        </div>
+    </div>
+    
 
     <div class="panel-body">
         <table class="table">
@@ -26,6 +35,11 @@
                                 <td>{{contact.value}}</td>
                             </tr>
                         </table>
+                    </td>
+                    <td>
+                        <a href="#/Users/Edit/{{user.userId}}" class="btn btn-primary">
+                            Edit
+                        </a>
                     </td>
                 </tr>
             </tbody>

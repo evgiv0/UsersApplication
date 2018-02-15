@@ -66,12 +66,12 @@
             </span>
         </div>
 
-        <div class="form-group" ng-show="vm.user.contacts"
+        <div class="form-group" ng-if="vm.user.contacts.length"
              ng-class="{'has-error':userForm.inputContactValue.$invalid &&
                                     userForm.inputContactValue.$dirty}">
             <label class="col-md-2 control-label" for="inputContactValue">User Contacts</label>
 
-            <div class="col-md-4"  >
+            <div class="col-md-4">
                 <input ng-repeat="contact in vm.user.contacts"
                        class="form-control"
                        style="margin-bottom:10px"
@@ -83,24 +83,32 @@
             </div>
         </div>
 
-        
+
         <div class="form-group">
-            <div class="col-md-4 col-md-offset-2">
-                <span>
-                    <button class="btn btn-primary"
-                            style="width:80px;margin-right:10px"
-                            ng-click="vm.submit()"
-                            ng-disabled="userForm.$invalid">
-                        Save
-                    </button>
-                </span>
-                <span>
-                    <button class="btn btn-default"
-                            style="width:70px"
-                            ng-click="vm.cancel(userForm)">
-                        Cancel
-                    </button>
-                </span>
+            <div class="col-md-4 col-md-offset-2 button-group">
+
+                <button class="btn btn-primary"
+                        style="width:80px;margin-right:10px"
+                        ng-click="vm.submit()"
+                        ng-disabled="userForm.$invalid">
+                    Save
+                </button>
+
+                <button class="btn btn-default"
+                        style="width:70px"
+                        ng-click="vm.cancel(userForm)">
+                    Cancel
+                </button>
+                <a href="#/" class="btn btn-default pull-right">
+                    Go Back
+                </a>
+                <!--class="btn-group"
+                     style="width:70px">
+                       <a href="#/" class="btn btn-default">
+                           Go Back
+                       </a>-->
+
+
             </div>
         </div>
 
