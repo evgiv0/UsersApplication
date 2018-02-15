@@ -30,15 +30,15 @@ namespace Users.WebAPI.Controllers
         }
 
         // POST: api/Users
-        public void Post([FromBody]User user)
+        public User Post([FromBody]User user)
         {
-            users.AddUser(user);
+            return users.AddUser(user);
         }
 
         // PUT: api/Users/5
-        public void Put(int id, [FromBody]User user)
+        public User Put(int id, [FromBody]User user)
         {
-            users.UpdateUser(id, user);
+            return users.UpdateUser(id, user);
         }
 
         // DELETE: api/Users/5

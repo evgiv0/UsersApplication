@@ -37,21 +37,48 @@ namespace Users.WebAPI.DB
                                         .ToList();
         }
 
-        public void AddUser(User user)
+        public User AddUser(User user)
         {
             _context.Users.Add(user);
             _context.SaveChanges();
+            return user;
         }
 
-        public void UpdateUser(int id, User newUser)
+        public User UpdateUser(int id, User newUser)
         {
-            var user = _context.Users.FirstOrDefault(u => u.UserId == id);
+            var user = _context.Users.Where(u => u.UserId == id).Include(u => u.Contacts).SingleOrDefault();
 
-            user.FirstName = newUser.FirstName;
-            user.LastName = newUser.LastName;
-            user.MiddleName = newUser.MiddleName;
-            user.Contacts = newUser.Contacts;
+            var userForSave = _context.Entry(user);
+            userForSave.CurrentValues.SetValues(newUser);
+
+            foreach (var contact in newUser.Contacts)
+            {
+                var originalContact = user.Contacts
+                    .Where(c => c.ContactId == contact.ContactId && c.ContactId != 0)
+                    .SingleOrDefault();
+
+                if (originalContact != null)
+                {
+                    var contactEntry = _context.Entry(originalContact);
+                    contactEntry.CurrentValues.SetValues(contact);
+                }
+                else
+                {
+                    contact.ContactId = 0;
+                    user.Contacts.Add(contact);
+                }
+            }
+            foreach (var originalContact in
+                         user.Contacts.Where(c => c.ContactId != 0).ToList())
+            {
+
+                if (!newUser.Contacts.Any(c => c.ContactId == originalContact.ContactId))
+                    _context.Contacts.Remove(originalContact);
+            }
+
             _context.SaveChanges();
+
+            return user;
         }
     }
 }

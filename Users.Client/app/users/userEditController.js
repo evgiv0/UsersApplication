@@ -25,7 +25,20 @@
         }
 
         vm.submit = function () {
-
+            vm.message = '';
+            if (vm.user.userId) {
+                vm.user.$update({ id: vm.user.userId },
+                    function (data) {
+                        vm.message = "Save Complete";
+                    });
+            }
+            else {
+                vm.user.$save(
+                    function (data) {
+                        vm.originalUser = angular.copy(data);
+                        vm.message = "Save Complete";
+                    });
+           }
         };
 
         vm.cancel = function (editForm) {
