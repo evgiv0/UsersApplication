@@ -4,15 +4,17 @@
          style="font-size:large">
         Users List
     </div>
-    <div class="panel-heading"
-         style="font-size:large">
-        <div class="btn-group">
+    
+    <form class="form-inline" style="margin-top:10px; margin-left:10px">
+        <div class="form-group">
             <a href="#/Users/Edit/0" class="btn btn-default">
                 Add User
             </a>
         </div>
-    </div>
-    
+        <div class="form-group">
+            <input type="text" ng-model="searchString" class="form-control form-inline" placeholder="Search">
+        </div>
+    </form>
 
     <div class="panel-body">
         <table class="table">
@@ -25,7 +27,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="user in usersCtrl.users">
+                <tr ng-repeat="user in usersCtrl.users.slice(((usersCtrl.pagging.currentPage-1)*usersCtrl.pagging.itemsPerPage), ((usersCtrl.pagging.currentPage)*usersCtrl.pagging.itemsPerPage)) | filter: searchString">
                     <td>{{user.firstName}}</td>
                     <td>{{user.middleName}}</td>
                     <td>{{user.lastName}}</td>
@@ -44,5 +46,7 @@
                 </tr>
             </tbody>
         </table>
+        <ul uib-pagination  items-per-page="usersCtrl.pagging.itemsPerPage" total-items="usersCtrl.pagging.totalItems" ng-model="usersCtrl.pagging.currentPage"></ul>
     </div>
 </div>
+

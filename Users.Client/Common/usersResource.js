@@ -7,6 +7,15 @@
         ["$resource", "appSettings", usersResource]);
 
     function usersResource($resource, appSettings) {
-        return $resource(appSettings.serverPath + "/api/users/:id", null, {update: { method: 'PUT' }});
+        return $resource(appSettings.serverPath + "/api/users/:id", null,
+            {
+                update: {
+                    method: 'PUT'
+                },
+                query: {
+                    method: 'GET',
+                    isArray: false
+                }
+            });
     }
 })();

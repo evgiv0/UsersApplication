@@ -1,7 +1,7 @@
 ﻿(function () {
     "use strict";
 
-    var app = angular.module("userManagement", ["ngRoute","common.services"]);
+    var app = angular.module("userManagement", ["ngRoute", "ui.bootstrap","common.services"]);
 
     app.config(function ($routeProvider) {
         $routeProvider

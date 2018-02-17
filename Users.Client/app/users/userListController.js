@@ -8,18 +8,18 @@
     function UserListCtrl(usersResource) {
         var vm = this;
 
-        vm.searchString = "ch";
-
-        vm.queryData = function (searchString) {
-            usersResource.query({
-                $filter: "substringof('" + searchString + "', FirstName)" +
-                "or substringof('" + searchString + "', LastName)" +
-                "or substringof('" + searchString + "', MiddleName)"
-            }, function (data) {
-                vm.users = data;
-            });
+        vm.pagging = {
+            currentPage: 1,
+            itemsPerPage: 5,
+            totalItems: 0
         };
 
-        vm.queryData("ch");
+        usersResource.query(function (data) {
+            var t = data;
+            vm.users = t.users;
+            vm.pagging.totalItems = t.countUser;
+        });
+
+        
     }
 }());

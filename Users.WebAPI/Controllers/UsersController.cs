@@ -1,8 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
+﻿using System.Web.Http;
 using System.Web.Http.Cors;
-using System.Web.Http.OData;
 using Users.WebAPI.DB;
 using Users.WebAPI.Models;
 
@@ -13,15 +10,10 @@ namespace Users.WebAPI.Controllers
     public class UsersController : ApiController
     {
         private UserRepository users = new UserRepository(new UsersDbContext());
-        [EnableQuery()]
-        public IQueryable<User> Get()
-        {
-            return users.GetUsers().AsQueryable();
-        }
 
-        public IEnumerable<User> Get(string search)
+        public UserViewModel Get()
         {
-            return users.GetUsersWithSearchCriteria(search.ToLower());
+            return users.GetUsers();
         }
 
         public User GetUser(int id)
@@ -39,11 +31,6 @@ namespace Users.WebAPI.Controllers
         public User Put(int id, [FromBody]User user)
         {
             return users.UpdateUser(id, user);
-        }
-
-        // DELETE: api/Users/5
-        public void Delete(int id)
-        {
         }
     }
 }
