@@ -70,16 +70,23 @@
              ng-class="{'has-error':userForm.inputContactValue.$invalid &&
                                     userForm.inputContactValue.$dirty}">
             <label class="col-md-2 control-label" for="inputContactValue">User Contacts</label>
-
-            <div class="col-md-4">
-                <input ng-repeat="contact in vm.user.contacts"
-                       class="form-control"
-                       style="margin-bottom:10px"
-                       id="inputContactValue"
-                       name="inputContactValue"
-                       type="text"
-                       placeholder="User Contacts"
-                       ng-model="contact.value">
+            <div class="form-group" ng-repeat="contact in vm.user.contacts">
+                <span class="col-md-4">
+                    <input class="form-control"
+                           id="inputContactValue"
+                           name="inputContactValue"
+                           type="text"
+                           placeholder="User Contacts"
+                           ng-model="contact.value">
+                </span>
+                <span class="col-md-4">
+                    <button class="btn btn-primary"
+                            style="width:80px"
+                            ng-click="vm.deleteContact(contact.contactId)"
+                            ng-disabled="userForm.$invalid">
+                        Delete
+                    </button>
+                </span>
             </div>
         </div>
 
@@ -102,13 +109,6 @@
                 <a href="#/" class="btn btn-default pull-right">
                     Go Back
                 </a>
-                <!--class="btn-group"
-                     style="width:70px">
-                       <a href="#/" class="btn btn-default">
-                           Go Back
-                       </a>-->
-
-
             </div>
         </div>
 

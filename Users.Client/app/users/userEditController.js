@@ -3,9 +3,9 @@
     angular
         .module("userManagement")
         .controller("UserEditCtrl",
-        ["usersResource", "$routeParams", UserEditCtrl]);
+        ["usersResource","contactsResource", "$routeParams", UserEditCtrl]);
 
-    function UserEditCtrl(usersResource, $routeParams) {
+    function UserEditCtrl(usersResource, contactsResource, $routeParams) {
         var vm = this;
 
         vm.user = {};
@@ -47,6 +47,10 @@
             editForm.$setPristine();
             vm.user = angular.copy(vm.originalUser);
             vm.message = "";
+        };
+
+        vm.deleteContact = function (contactId) {
+            console.log(contactId);
         };
     }
 }());
