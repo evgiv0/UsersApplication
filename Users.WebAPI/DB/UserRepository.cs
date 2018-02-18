@@ -24,12 +24,12 @@ namespace Users.WebAPI.DB
             return user;
         }
 
-        public UserViewModel GetUsers()
+        public UsersViewModel GetUsers()
         {
             var users = _context.Users.Include(u => u.Contacts).ToList();
             var count = users.Count;
 
-            return new UserViewModel { Users = users, CountUser = count };
+            return new UsersViewModel { Users = users, CountUser = count };
         }
 
         public IEnumerable<User> GetUsersWithSearchCriteria(string search)

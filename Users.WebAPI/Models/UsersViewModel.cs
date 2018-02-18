@@ -2,7 +2,7 @@
 
 namespace Users.WebAPI.Models
 {
-    public class UserViewModel
+    public class UsersViewModel
     {
         public IEnumerable<User> Users { get; set; }
         public int CountUser { get; set; }

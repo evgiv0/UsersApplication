@@ -15,9 +15,8 @@
         };
 
         usersResource.query(function (data) {
-            var t = data;
-            vm.users = t.users;
-            vm.pagging.totalItems = t.countUser;
+            vm.users = data.users;
+            vm.pagging.totalItems = data.countUser;
         });
 
         

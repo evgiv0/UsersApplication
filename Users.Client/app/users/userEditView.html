@@ -71,25 +71,33 @@
                                     userForm.inputContactValue.$dirty}">
             <label class="col-md-2 control-label" for="inputContactValue">User Contacts</label>
             <div class="form-group" ng-repeat="contact in vm.user.contacts">
-                <span class="col-md-4">
+                <div>
+                <span class="col-md-4" ng-class="{'col-md-offset-2':!$first}">
                     <input class="form-control"
                            id="inputContactValue"
                            name="inputContactValue"
                            type="text"
-                           placeholder="User Contacts"
+                           placeholder="User Contact"
                            ng-model="contact.value">
                 </span>
-                <span class="col-md-4">
-                    <button class="btn btn-primary"
-                            style="width:80px"
-                            ng-click="vm.deleteContact(contact.contactId)"
+                <span>
+                    <button class="btn btn-danger"
+                            ng-click="vm.deleteContact($index)"
                             ng-disabled="userForm.$invalid">
                         Delete
                     </button>
                 </span>
+                    </div>
             </div>
         </div>
-
+        <div class="form-group">
+            <div class="col-md-4 col-md-offset-2">
+                <button class="btn btn-info"
+                        ng-click="vm.addContact()">
+                    Add Contact
+                </button>
+            </div>
+        </div>
 
         <div class="form-group">
             <div class="col-md-4 col-md-offset-2 button-group">
@@ -121,3 +129,4 @@
 
     </fieldset>
 </form>
+

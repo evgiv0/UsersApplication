@@ -3,9 +3,9 @@
     angular
         .module("userManagement")
         .controller("UserEditCtrl",
-        ["usersResource","contactsResource", "$routeParams", UserEditCtrl]);
+        ["usersResource", "$routeParams", UserEditCtrl]);
 
-    function UserEditCtrl(usersResource, contactsResource, $routeParams) {
+    function UserEditCtrl(usersResource, $routeParams) {
         var vm = this;
 
         vm.user = {};
@@ -23,7 +23,7 @@
             vm.title = "Edit";
         }
         else {
-            vm.title = "New Product";
+            vm.title = "New User";
         }
 
         vm.submit = function () {
@@ -40,7 +40,7 @@
                         vm.originalUser = angular.copy(data);
                         vm.message = "Save Complete";
                     });
-           }
+            }
         };
 
         vm.cancel = function (editForm) {
@@ -49,8 +49,14 @@
             vm.message = "";
         };
 
+        
+
+        vm.addContact = function () {
+            vm.user.contacts.push({"value": ""});
+        };
+
         vm.deleteContact = function (contactId) {
-            console.log(contactId);
+            vm.user.contacts.splice(contactId, 1);
         };
     }
 }());

@@ -11,7 +11,7 @@ namespace Users.WebAPI.Controllers
     {
         private UserRepository repo = new UserRepository(new UsersDbContext());
 
-        public UserViewModel Get()
+        public UsersViewModel Get()
         {
             return repo.GetUsers();
         }

@@ -204,11 +204,9 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Controllers\ContactsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
-    <Compile Include="DB\ContactRepository.cs" />
     <Compile Include="DB\UserRepository.cs" />
     <Compile Include="DB\UsersContextInitializer.cs" />
     <Compile Include="DB\UsersDbContext.cs" />
@@ -217,7 +215,7 @@
     </Compile>
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="Models\UserViewModel.cs" />
+    <Compile Include="Models\UsersViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
