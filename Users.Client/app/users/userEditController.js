@@ -19,18 +19,14 @@
                 vm.originalUser = angular.copy(data);
             });
 
-        if (vm.user && vm.user.userId) {
-            vm.title = "Edit";
-        }
-        else {
-            vm.title = "New User";
-        }
+        
 
         vm.submit = function () {
             vm.message = '';
             if (vm.user.userId) {
                 vm.user.$update({ id: vm.user.userId },
                     function (data) {
+                        vm.originalUser = angular.copy(data);
                         vm.message = "Save Complete";
                     });
             }
@@ -58,5 +54,7 @@
         vm.deleteContact = function (contactId) {
             vm.user.contacts.splice(contactId, 1);
         };
+
+        
     }
 }());
