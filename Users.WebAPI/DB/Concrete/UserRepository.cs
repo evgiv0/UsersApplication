@@ -46,16 +46,20 @@ namespace Users.WebAPI.DB.Concrete
             return user;
         }
 
-        public User UpdateUser(int id, User newUser)
+        public User IsUserForUpdateExists(int id)
         {
-            var user = _context.Users.Where(u => u.UserId == id).Include(u => u.Contacts).SingleOrDefault();
+            return _context.Users.Where(u => u.UserId == id).Include(u => u.Contacts).SingleOrDefault();
 
-            var userForSave = _context.Entry(user);
+        }
+
+        public User UpdateUser(User existingUser, User newUser)
+        {
+            var userForSave = _context.Entry(existingUser);
             userForSave.CurrentValues.SetValues(newUser);
 
             foreach (var contact in newUser.Contacts)
             {
-                var originalContact = user.Contacts
+                var originalContact = existingUser.Contacts
                     .Where(c => c.ContactId == contact.ContactId && c.ContactId != 0)
                     .SingleOrDefault();
 
@@ -67,11 +71,11 @@ namespace Users.WebAPI.DB.Concrete
                 else
                 {
                     contact.ContactId = 0;
-                    user.Contacts.Add(contact);
+                    existingUser.Contacts.Add(contact);
                 }
             }
             foreach (var originalContact in
-                         user.Contacts.Where(c => c.ContactId != 0).ToList())
+                         existingUser.Contacts.Where(c => c.ContactId != 0).ToList())
             {
 
                 if (!newUser.Contacts.Any(c => c.ContactId == originalContact.ContactId))
@@ -80,7 +84,7 @@ namespace Users.WebAPI.DB.Concrete
 
             _context.SaveChanges();
 
-            return user;
+            return existingUser;
         }
     }
 }

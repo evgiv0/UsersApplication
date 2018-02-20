@@ -16,26 +16,36 @@ namespace Users.WebAPI.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        public UsersViewModel Get()
+        public IHttpActionResult Get()
         {
-            return _unitOfWork.Users.GetUsers();
+            return Ok(_unitOfWork.Users.GetUsers());
         }
 
-        public User GetUser(int id)
+        public IHttpActionResult GetUser(int id)
         {
-            return _unitOfWork.Users.GetUser(id);
+            return Ok(_unitOfWork.Users.GetUser(id));
         }
 
         // POST: api/Users
-        public User Post([FromBody]User user)
+        public IHttpActionResult Post([FromBody]User user)
         {
-            return _unitOfWork.Users.AddUser(user);
+            if (user == null)
+                return BadRequest();
+
+            var newUser = _unitOfWork.Users.AddUser(user);
+
+            return Created<User>(Request.RequestUri + newUser.UserId.ToString(), newUser);
         }
 
         // PUT: api/Users/5
-        public User Put(int id, [FromBody]User user)
+        public IHttpActionResult Put(int id, [FromBody]User user)
         {
-            return _unitOfWork.Users.UpdateUser(id, user);
+            if (user == null)
+                return BadRequest();
+            var existingUser = _unitOfWork.Users.IsUserForUpdateExists(id);
+            if (existingUser == null)
+                return NotFound();
+            return Ok(_unitOfWork.Users.UpdateUser(existingUser, user));
         }
     }
 }

@@ -9,6 +9,7 @@ namespace Users.WebAPI.DB
         UsersViewModel GetUsers();
         IEnumerable<User> GetUsersWithSearchCriteria(string search);
         User AddUser(User user);
-        User UpdateUser(int id, User newUser);
+        User UpdateUser(User existingUser, User newUser);
+        User IsUserForUpdateExists(int id);
     }
 }
