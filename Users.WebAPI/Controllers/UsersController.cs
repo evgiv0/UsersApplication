@@ -1,6 +1,6 @@
 ﻿using System.Web.Http;
 using System.Web.Http.Cors;
-using Users.WebAPI.DB;
+using Users.WebAPI.DB.Abstract;
 using Users.WebAPI.Models;
 
 namespace Users.WebAPI.Controllers
@@ -9,33 +9,33 @@ namespace Users.WebAPI.Controllers
 
     public class UsersController : ApiController
     {
-        private UserRepository repo = new UserRepository(new UsersDbContext());
+        private IUnitOfWork _unitOfWork;
 
-        //public UsersController(UserRepository _repo)
-        //{
-        //    repo = _repo;
-        //}
+        public UsersController(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
 
         public UsersViewModel Get()
         {
-            return repo.GetUsers();
+            return _unitOfWork.Users.GetUsers();
         }
 
         public User GetUser(int id)
         {
-            return repo.GetUser(id);
+            return _unitOfWork.Users.GetUser(id);
         }
 
         // POST: api/Users
         public User Post([FromBody]User user)
         {
-            return repo.AddUser(user);
+            return _unitOfWork.Users.AddUser(user);
         }
 
         // PUT: api/Users/5
         public User Put(int id, [FromBody]User user)
         {
-            return repo.UpdateUser(id, user);
+            return _unitOfWork.Users.UpdateUser(id, user);
         }
     }
 }

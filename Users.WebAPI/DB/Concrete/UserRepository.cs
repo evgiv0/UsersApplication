@@ -3,12 +3,11 @@ using System.Data.Entity;
 using System.Linq;
 using Users.WebAPI.Models;
 
-namespace Users.WebAPI.DB
+namespace Users.WebAPI.DB.Concrete
 {
-    public class UserRepository
+    public class UserRepository : IUserRepository
     {
         private readonly UsersDbContext _context;
-
         public UserRepository(UsersDbContext context)
         {
             _context = context;
